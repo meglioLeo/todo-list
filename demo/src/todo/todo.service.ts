@@ -22,4 +22,21 @@ export class TodoService {
         return todo || null;               // return the todo or null if not found
     }
 
+    public createTodo(todoData: Omit<Todo, 'id'>): Todo {      // parameter todoData is a Todo without the id property
+        const todos = this.readTodos();   // read the todos from the database file
+
+        const newId = todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) + 1 : 1; // get the new id
+
+        const newTodo: Todo = {
+            id: newId,
+            ...todoData
+        };
+
+        todos.push(newTodo); // add the new todo to the array
+
+        fs.writeFileSync(DB_FILE, JSON.stringify(todos, null, 2)); // write the todos to the file
+
+        return newTodo; // return the new todo
+
+    }
 }
