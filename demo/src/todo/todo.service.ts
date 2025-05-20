@@ -8,7 +8,7 @@ const DB_FILE = path.join(__dirname, 'todo.json');  // path to the database file
 @Injectable()
 export class TodoService {
     
-    private readTodos(): Todo[]{          // read the todos from the database file
+    public readTodos(): Todo[]{          // read the todos from the database file
         if(!fs.existsSync(DB_FILE)){      // check if the file exists
             return []
         }
@@ -16,7 +16,7 @@ export class TodoService {
         return JSON.parse(data) as Todo[];                // parse the file content to Todo array
     }
 
-    private readTodoById(id: string) :Todo | null{
+    public readTodoById(id: string) :Todo | null{
         const todos = this.readTodos();   // read the todos from the database file
         const todo = todos.find(todo => todo.id === Number(id));  // find the todo by id
         return todo || null;               // return the todo or null if not found
