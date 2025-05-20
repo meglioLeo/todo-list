@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { Todo } from './entities/todo.entity';
 
@@ -15,5 +15,10 @@ export class TodoController {
     @Get(':id')
     getTodoById(@Param('id') id:string): Todo | null {
         return this.todoService.readTodoById(id); // return todo by id
+    }
+
+    @Post()
+    createTodo(@Body() todoData: any): Todo{
+        return this.todoService.createTodo(todoData); // create a new todo
     }
 }
