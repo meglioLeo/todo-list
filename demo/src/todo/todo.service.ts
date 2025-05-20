@@ -16,4 +16,10 @@ export class TodoService {
         return JSON.parse(data) as Todo[];                // parse the file content to Todo array
     }
 
+    private readTodoById(id: string) :Todo | null{
+        const todos = this.readTodos();   // read the todos from the database file
+        const todo = todos.find(todo => todo.id === Number(id));  // find the todo by id
+        return todo || null;               // return the todo or null if not found
+    }
+
 }
