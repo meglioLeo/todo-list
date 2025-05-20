@@ -8,4 +8,12 @@ const DB_FILE = path.join(__dirname, 'todo.json');  // path to the database file
 @Injectable()
 export class TodoService {
     
+    private readTodos(): Todo[]{
+        if(!fs.existsSync(DB_FILE)){
+            return []
+        }
+        const data = fs.readFileSync(DB_FILE, 'utf-8'); 
+        return JSON.parse(data) as Todo[];                       
+    }
+
 }
