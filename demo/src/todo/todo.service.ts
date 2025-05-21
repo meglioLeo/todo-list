@@ -39,4 +39,18 @@ export class TodoService {
         return newTodo; // return the new todo
 
     }
+
+    public deleteTodo(id: string): boolean{
+        const todos = this.readTodos();
+        const todoIndex = todos.findIndex(todo => todo.id === Number(id)); // find the index of the todo by id
+
+        if(todoIndex === -1){ // check if the todo was found
+            return false;
+        }
+
+        todos.splice(todoIndex, 1); // remove the todo from the array
+
+        fs.writeFileSync(DB_FILE, JSON.stringify(todos, null, 2)); // write the todos to the file
+        return true;
+    }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete, NotFoundException } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { Todo } from './entities/todo.entity';
 
@@ -20,5 +20,13 @@ export class TodoController {
     @Post()
     createTodo(@Body() todoData: any): Todo{
         return this.todoService.createTodo(todoData); // create a new todo
+    }
+
+    @Delete(':id')
+    deleteTodo(@Param('id') id: string): void {
+        const deleted = this.todoService.deleteTodo(id); // delete todo by id
+        if(!deleted){
+            throw new NotFoundException(`${id} not found`); // throw an error if not found
+        }
     }
 }
