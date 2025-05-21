@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete, NotFoundException, Patch } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { Todo } from './entities/todo.entity';
 
@@ -13,8 +13,11 @@ export class TodoController {
     }
 
     @Get(':id')
-    getTodoById(@Param('id') id:string): Todo | null {
-        return this.todoService.readTodoById(id); // return todo by id
+    getTodoById(@Param('id') id:string): void {
+        const found =  this.todoService.readTodoById(id); 
+        if(!found){
+            throw new NotFoundException(`${id} not found`); // throw an error if not found
+        }
     }
 
     @Post()
@@ -29,4 +32,13 @@ export class TodoController {
             throw new NotFoundException(`${id} not found`); // throw an error if not found
         }
     }
+
+    @Patch(':id/status')
+    toggleStatus(@Param('id') id: string): void {
+        const updated = this.todoService.toggleStatus(id); // toggle the status of the todo
+        if(!updated){
+            throw new NotFoundException(`${id} not found`); // throw an error if not found
+        }
+    }
+
 }

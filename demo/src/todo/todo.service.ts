@@ -53,4 +53,17 @@ export class TodoService {
         fs.writeFileSync(DB_FILE, JSON.stringify(todos, null, 2)); // write the todos to the file
         return true;
     }
+
+    public toggleStatus(id: string): Todo | null {
+        const todos = this.readTodos();
+        const todo = todos.find(todo => todo.id === Number(id));
+
+        if(!todo) {
+            return null; // return null if the todo was not found
+        }
+
+        todo.isDone = !todo.isDone; // toggle the completed status
+        fs.writeFileSync(DB_FILE, JSON.stringify(todos, null, 2)); // write the todos to the file
+        return todo; // return the updated todo
+    }
 }
