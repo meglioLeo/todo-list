@@ -3,7 +3,7 @@ import { Todo } from "./entities/todo.entity";    // import the Todo entity
 import * as fs from "fs";                           // allows to work with file 
 import * as path from "path";                       // allows to work with path
 
-const DB_FILE = path.join(__dirname, 'todo.json');  // path to the database file
+const DB_FILE = path.resolve(process.cwd(), 'data', 'todo.json');  // path to the database file
 
 @Injectable()
 export class TodoService {
