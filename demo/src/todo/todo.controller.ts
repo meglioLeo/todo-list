@@ -13,11 +13,12 @@ export class TodoController {
     }
 
     @Get(':id')
-    getTodoById(@Param('id') id:string): void {
+    getTodoById(@Param('id') id:string): Todo {
         const found =  this.todoService.readTodoById(id); 
         if(!found){
             throw new NotFoundException(`${id} not found`); // throw an error if not found
         }
+        return found; // return the todo by id
     }
 
     @Post()
