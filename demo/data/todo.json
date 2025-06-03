@@ -1,18 +1,1 @@
-[
-  {
-    "id": 1,
-    "title": "Mangiare",
-    "completed": false
-  },
-  {
-    "id": 2,
-    "title": "Bere",
-    "completed": false,
-    "isDone": true
-  },
-  {
-    "id": 4,
-    "title": "Superman",
-    "completed": false
-  }
-]
+[]

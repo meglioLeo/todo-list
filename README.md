@@ -31,22 +31,19 @@ It is designed as an **educational example** to learn how to structure a basic N
 
 ```bash
 # 1. Get all todos
-curl -X GET http://localhost:3000/todos
+Invoke-RestMethod -Uri http://localhost:3000/todos -Method GET
 
 # 2. Get a specific todo by ID (e.g., ID = 1)
-curl -X GET http://localhost:3000/todos/1
+Invoke-RestMethod -Uri http://localhost:3000/todos/1 -Method GET
 
 # 3. Create a new todo
-curl -X POST http://localhost:3000/todos \
-  -H "Content-Type: application/json" \
-  -d '{"title": "Buy groceries", "completed": false}'
+Invoke-RestMethod -Uri http://localhost:3000/todos -Method POST -Body '{ "title": "Test from PowerShell", "completed": false }' -ContentType "application/json"
 
 # 4. Delete a todo by ID
-curl -X DELETE http://localhost:3000/todos/1
+Invoke-RestMethod -Uri http://localhost:3000/todos/1 -Method DELETE
 
 # 5. Toggle completion status of a todo by ID
-curl -X PATCH http://localhost:3000/todos/1/status
-
+Invoke-RestMethod -Uri http://localhost:3000/todos/1/status -Method PATCH
 ---
 
 Getting started
